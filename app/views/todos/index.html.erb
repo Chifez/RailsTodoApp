@@ -1,0 +1,43 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Todos" %>
+
+  <div class='w-full flex justify-center mb-4'>
+    <div class="flex justify-between items-center w-[60%]">
+      <h1 class="font-bold text-4xl">Todos</h1>
+      <%= link_to "New todo", new_todo_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    </div>
+  </div>
+
+  <div id="todos" class="min-w-full w-[60%] mx-auto border-t border-x border-gray-300">
+    <div class='flex items-center justify-between border-b border-gray-300'>
+          <p class="flex-1 py-4 text-center ">
+            <strong class="font-medium ">Title</strong> 
+          </p>
+          <p class="flex-1 py-4 text-center border-l border-gray-300">
+            <strong class="font-medium ">Description</strong> 
+          </p>
+          <p class="flex-1 py-4 text-center border-l border-gray-300">
+            <strong class="font-medium">Completed</strong>
+          </p>
+        </div>
+    <% @todos.each do |todo| %>
+      <%= link_to todo_path(todo), class: "block hover:bg-gray-100 transition-all" do %>
+        <div id="<%= dom_id todo %>" class='flex items-center justify-between py-4 px-6 border-b border-gray-300'>
+          <p class="flex-1">
+            <%= todo.title %>
+          </p>
+          <p class="flex-1">
+           <%= todo.description %>
+          </p>
+          <p class="flex-1 text-center">
+             <%= todo.completed ? 'Yes' : 'No' %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
